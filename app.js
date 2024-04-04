@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-
+import CategoryRoute from "./api/routes/categoryRoutes.js";
 import UserRoute from "./api/routes/userRoutes.js";
 const app = express();
 
@@ -12,14 +12,10 @@ app.get("/", (req, res) => {
 
 app.use(bodyParser.json({ limit: "30MB", extended: true })); //for Images
 app.use(bodyParser.urlencoded({ limit: "30MB", extended: true })); //for Images
-
-
 app.use(cors());
-
 app.use("/auth", UserRoute);
-
+app.use("/category", CategoryRoute);
 const PORT = process.env.PORT || 8080;
-
 mongoose
   .connect(
     "mongodb+srv://asmamughal097:UZDynR7zE9b5qTYm@cluster0.jlpafag.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"

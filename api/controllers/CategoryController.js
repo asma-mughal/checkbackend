@@ -1,6 +1,5 @@
 import slugify from "slugify";
 import { Category } from "../models/categoryModal.js";
-import mongoose from "mongoose";
 export const addCategory = async (req, res) => {
   try {
     const { name } = req.body;
