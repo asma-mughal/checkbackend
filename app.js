@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import CategoryRoute from "./api/routes/categoryRoutes.js";
 import UserRoute from "./api/routes/userRoutes.js";
+import ProductRoute from './api/routes/productRoutes.js';
 const app = express();
 
 app.get("/", (req, res) => {
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30MB", extended: true })); //for Images
 app.use(cors());
 app.use("/auth", UserRoute);
 app.use("/category", CategoryRoute);
+app.use("/product", ProductRoute);
 const PORT = process.env.PORT || 8080;
 mongoose
   .connect(
