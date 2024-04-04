@@ -1,19 +1,20 @@
 // Import the Express module
-const express = require('express');
-
+import express from 'express';
+import mongoose from "mongoose";
+import cors from "cors";
 // Create an Express application
 const app = express();
 
-// Define a route handler for the root URL
-app.get("/", (req, res) => {
-    res.status(200).json({ message: "Welcome to the server!" });
-  });
-  
-  app.get("/product", (req, res) => {
-    res.status(200).json({ message: "Welcome to the product!" });
-  });
-  
-// Start the server and listen on port 3000
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:8080');
+app.use(cors());
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
 });
+
+const PORT = process.env.PORT || 8080;
+
+mongoose
+  .connect(
+    "mongodb+srv://asmamughal097:UZDynR7zE9b5qTYm@cluster0.jlpafag.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => app.listen(PORT, () => console.log(`Server Running at ${PORT}`)))
+  .catch((err) => console.error("MongoDB connection error:", err));
