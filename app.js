@@ -1,14 +1,22 @@
-// Import the Express module
-import express from 'express';
+import express from "express";
+import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-// Create an Express application
+
+import UserRoute from "./api/routes/userRoutes.js";
 const app = express();
 
-app.use(cors());
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to the server!" });
 });
+
+app.use(bodyParser.json({ limit: "30MB", extended: true })); //for Images
+app.use(bodyParser.urlencoded({ limit: "30MB", extended: true })); //for Images
+
+
+app.use(cors());
+
+app.use("/auth", UserRoute);
 
 const PORT = process.env.PORT || 8080;
 
